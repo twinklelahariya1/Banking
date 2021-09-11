@@ -29,7 +29,7 @@ public class ApplicationExceptionHandler {
         return Mono.just(new APIResponse(422, null, message));
     }
 
-    @ExceptionHandler(TransactionExpired.class)
+    @ExceptionHandler(TransactionTimedOut.class)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public Mono<APIResponse> resourceNotFoundException() {
 

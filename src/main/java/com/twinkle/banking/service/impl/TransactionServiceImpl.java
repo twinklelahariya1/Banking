@@ -2,7 +2,7 @@ package com.twinkle.banking.service.impl;
 
 import com.twinkle.banking.exception.DataNotFoundException;
 import com.twinkle.banking.exception.InvalidRequestException;
-import com.twinkle.banking.exception.TransactionExpired;
+import com.twinkle.banking.exception.TransactionTimedOut;
 import com.twinkle.banking.model.request.Transaction;
 import com.twinkle.banking.model.response.Statistics;
 import com.twinkle.banking.model.response.TransactionResponse;
@@ -65,7 +65,7 @@ public class TransactionServiceImpl implements TransactionService {
             return Mono.error(new InvalidRequestException("Invalid Timestamp"));
         }
         if (transaction.getTimestamp().toInstant().isBefore(instant.minusSeconds(60)))
-            return Mono.error(new TransactionExpired());
+            return Mono.error(new TransactionTimedOut());
         return Mono.just(transaction);
     }
 
